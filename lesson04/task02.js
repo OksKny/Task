@@ -1,8 +1,11 @@
 'use strict';
-
-function caseChange(str) {
+const str = 'привет Мир';
+const caseChange = (str) => {
     if(!str) return str;
-    return str[0].toUpperCase() + str.slice(1).toLowerCase()
+
+    str = str.trim().toLowerCase();
+
+    return str[0].toUpperCase() + str.slice(1);
 }
 
 console.log(caseChange('привет Мир'));

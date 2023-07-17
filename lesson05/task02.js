@@ -2,12 +2,12 @@
 
 const isPrime = (n) => {
     for (let i = 2; i < n; i++) {
-        if (n % i === 0) {
-            console.log('Не простое число');
+        if (!(n % i)) {
             return false;
         }
     }
-    console.log('Простое число');
+    if (n > 1) {
+        return true;
+    }
 }
-
 isPrime();
