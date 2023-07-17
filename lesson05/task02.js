@@ -6,8 +6,8 @@ const isPrime = (n) => {
             return false;
         }
     }
-    if (n > 1) {
-        return true;
-    }
+    
+    return n > 1;
+    
 }
 isPrime();
