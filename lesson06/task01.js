@@ -2,19 +2,26 @@
 
 const allStudents = ['Иванов', 'Петров', 'Сидоров', 'Кузнецов', 'Смирнов', 'Попов', 'Соколов'];
 const failedStudents = ['Сидоров', 'Смирнов', 'Попов'];
+let result;
 
-function filter(arr, arr2) {
+const filter = (arr, arr2) => {
+    const result = [];
     for (let i = 0; i < arr.length; i++) {
-        let j = arr2.indexOf(arr[i])
-        if (j != -1) {
-            arr.splice(i, 1);
-            arr2.splice(j, 1);
+        if (!arr2.includes(arr[i])) {
+            result.push(arr[i]);
         }
     }
 
-    return arr;
+    return result;
+
 };
 
-filter(allStudents, failedStudents);
+result = filter(allStudents, failedStudents);
 
 console.log(filter(allStudents, failedStudents));
+console.log('allStudents:', allStudents);
+console.log('failedStudents:', failedStudents);
+
+
+
+
