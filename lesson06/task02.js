@@ -8,10 +8,12 @@ const getAverageValue = (numbers) => {
         sum += numbers[i]; 
     }
     const mean = sum / numbers.length;
+    
     return Math.floor(mean);  
 };
 
 getAverageValue(allCashbox);
+
 console.log(getAverageValue(allCashbox));
 
 

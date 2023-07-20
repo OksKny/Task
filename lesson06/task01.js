@@ -11,8 +11,10 @@ function filter(arr, arr2) {
             arr2.splice(j, 1);
         }
     }
+
     return arr;
-}
+};
 
 filter(allStudents, failedStudents);
+
 console.log(filter(allStudents, failedStudents));
