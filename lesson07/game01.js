@@ -1,31 +1,29 @@
 'use strict';
 
-const min = Math.ceil(1);
-const max = Math.floor(100);
+const start = (min = 1, max = 100) => {
+  let userNumber = '';
+  const number = Math.floor(Math.random() * (max - min)) + min;
 
-const number = Math.floor(Math.random() * (max - min)) + min;
-console.log(number);
-
-const start = () => {
-  while (true) {
-    let userNumber = prompt('Введите число');
-    if (isNaN(userNumber)) {
-      alert('Введи число!');
-    } else if (userNumber === null) {
-      alert('Пока :)');
-    break;
-    }
+  while (userNumber !== null && +userNumber !== number) {
+    userNumber = prompt('Введите число');
 
     switch (true) {
-      case (+(userNumber) === number): 
-      alert('Правильно!');
-      break;
+      case userNumber === null:
+        alert('Пока :)');
+        break;
+      case isNaN(userNumber):
+      case +userNumber > max:
+      case +userNumber < min:
+        alert(`Введи число от ${min} до ${max}`);
+        break;
       case (+(userNumber) > number): 
-      alert('Меньше');
-      break;
+        alert('Меньше');
+        break;
       case (+(userNumber) < number): 
-      alert('Больше');
-      break;
+        alert('Больше');
+        break;
+      default:
+        alert('Правильно!');
     }
   }
 }
