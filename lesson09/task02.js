@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
 function countUnique(listIPv4) {
-    const unique = Array.from(new Set(listIPv4)) 
-        return Object.keys(unique).length;
-   };
+  const unique = new Set(listIPv4);
+  return unique.size;
+}
 
 
-   const uniqueCountIP = countUnique(listIPv4);
-   console.log(uniqueCountIP);
+const uniqueCountIP = countUnique(listIPv4);
+console.log(uniqueCountIP);

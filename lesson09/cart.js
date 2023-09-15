@@ -1,43 +1,42 @@
-'user strict';
+'use strict';
 
 
 const cart = {
-    items: [],
-    count: 0,
-    get totalPrice() {
-        return this.calculateItemPrice();
-    },
+  items: [],
+  count: 0,
+  get totalPrice() {
+    return this.calculateItemPrice();
+  },
 
-    add(prodName, prodPrice, prodAmount) {
-        const goods = {
-            prodName,
-            prodPrice,
-            prodAmount,
-        };
-        
-        this.items.push(goods);
-        this.increaseCount(prodAmount);
-    },
+  add(prodName, prodPrice, prodAmount) {
+    const goods = {
+      prodName,
+      prodPrice,
+      prodAmount,
+    };
 
-    increaseCount(num) {
-        this.count += num;
-    },
+    this.items.push(goods);
+    this.increaseCount(prodAmount);
+  },
 
-    calculateItemPrice() {
-        return this.items.reduce((totalPrice, { prodAmount, prodPrice }) => {
-            return (totalPrice += prodAmount * prodPrice);
-        }, 0);
-    },
+  increaseCount(num) {
+    this.count += num;
+  },
 
-    clear() {
-        this.items = Object.create(null);
-    },
+  calculateItemPrice() {
+    return this.items.reduce((totalPrice, {prodAmount, prodPrice}) =>
+      (totalPrice += prodAmount * prodPrice), 0);
+  },
 
-    print() {
-        console.log(JSON.stringify(this.items));
-        console.log(this.totalPrice);
-        console.log(this.count);
-    },
+  clear() {
+    this.items = Object.create(null);
+  },
+
+  print() {
+    console.log(JSON.stringify(this.items));
+    console.log(this.totalPrice);
+    console.log(this.count);
+  },
 };
 
 
