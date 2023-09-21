@@ -1,15 +1,15 @@
 'use strict';
 
 const generateArray = (arr) => {
-const number = Math.floor(Math.random() * 11);
-arr.push(number);
+  const number = Math.floor(Math.random() * 11);
+  arr.push(number);
 
-if (arr.reduce((a, b) => a + b, 0) < 50) {
+  if (arr.reduce((a, b) => a + b, 0) < 50) {
     return generateArray(arr);
-} else {
+  } else {
     return arr;
-}
-}
+  }
+};
 
 const myArray = [];
 const result = generateArray(myArray);

@@ -4,7 +4,7 @@ const rectangle = {
   width: 5,
   height: 5,
 
-  setWidth: function(width) {
+  setWidth(width) {
     if (typeof width === 'number') {
       this.width = width;
     } else {
@@ -12,7 +12,7 @@ const rectangle = {
     }
   },
 
-  setHeight: function(height) {
+  setHeight(height) {
     if (typeof height === 'number') {
       this.height = height;
     } else {
@@ -20,20 +20,20 @@ const rectangle = {
     }
   },
 
-  getPerimeter: function() {
+  getPerimeter() {
     return (this.width + this.height) * 2 + 'см';
   },
 
-  getArea: function() {
+  getArea() {
     return this.width * this.height + 'см²';
-  }
+  },
 };
 
-console.log(rectangle.getPerimeter()); 
+console.log(rectangle.getPerimeter());
 console.log(rectangle.getArea());
 
 rectangle.setWidth(8);
 rectangle.setHeight(10);
 
-console.log(rectangle.getPerimeter()); 
-console.log(rectangle.getArea()); 
+console.log(rectangle.getPerimeter());
+console.log(rectangle.getArea());
