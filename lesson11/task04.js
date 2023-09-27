@@ -25,19 +25,26 @@ const cart = {
     this.count += num;
   },
 
-  setDiscount(promocode) {
-    if (promocode === 'METHED') {
-      this.discount = 15;
-    } else if (promocode === 'NEWYEAR') {
-      this.discount = 21;
-    } else {
-      console.log('Недействительный промокод');
+  set discount(promocode) {
+    switch (promocode) {
+      case 'METHED':
+        this.discount = 15;
+        break;
+      case 'NEWYEAR':
+        this.discount = 21;
+        break;
+      default:
+        console.log('Недействительный промокод');
+        break;
     }
   },
 
   calculateItemPrice() {
-    const discountedPrice = this.items.reduce((totalPrice, {prodAmount, prodPrice}) =>
-      (totalPrice += prodAmount * prodPrice), 0);
+    const discountedPrice = this.items.reduce(
+      (totalPrice, { prodAmount, prodPrice }) =>
+        (totalPrice += prodAmount * prodPrice),
+      0
+    );
 
     return discountedPrice * (1 - this.discount / 100);
   },
@@ -59,6 +66,5 @@ cart.add('apple', 30, 10);
 cart.add('banana', 70, 3);
 cart.add('kiwi', 100, 7);
 
-cart.setDiscount('METHED');
+cart.discount = 'METHED';
 cart.print();
-
