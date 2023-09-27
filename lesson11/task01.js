@@ -17,21 +17,19 @@ const start = (min = 1, max = 100) => {
       return;
     }
 
-    if (+userNumber > number) {
-      alert('Меньше');
-      getUserNumber();
-      return;
+    switch (true) {
+      case +userNumber > number:
+        alert('Меньше');
+        getUserNumber();
+        return;
+      case +userNumber < number:
+        alert('Больше');
+        getUserNumber();
+        return;
+      default:
+        alert('Правильно!');
     }
-
-    if (+userNumber < number) {
-      alert('Больше');
-      getUserNumber();
-      return;
-    }
-
-    alert('Правильно!');
   };
-
   getUserNumber();
 };
 

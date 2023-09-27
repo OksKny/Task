@@ -36,7 +36,7 @@ const cart = {
   },
 
   calculateItemPrice() {
-  const discountedPrice = this.items.reduce((totalPrice, {prodAmount, prodPrice}) =>
+    const discountedPrice = this.items.reduce((totalPrice, {prodAmount, prodPrice}) =>
       (totalPrice += prodAmount * prodPrice), 0);
 
     return discountedPrice * (1 - this.discount / 100);
