@@ -2,12 +2,12 @@
 
 const generateArray = (arr) => {
   const number = Math.floor(Math.random() * 11);
-  const newArr = [...arr, number];
 
-  if (newArr.reduce((a, b) => a + b, 0) < 50) {
-    return generateArray(newArr);
+  if (arr.reduce((a, b) => a + b, 0) + number >= 50) {
+    return arr;
   } else {
-    return newArr;
+    const newArr = [...arr, number];
+    return generateArray(newArr);
   }
 };
 

@@ -28,20 +28,20 @@ const rectangle = {
     return this._height;
   },
 
-  getPerimeter() {
+  get perimeter() {
     return (this._width + this._height) * 2 + 'см';
   },
 
-  getArea() {
+  get area() {
     return this._width * this._height + 'см²';
   },
 };
 
-console.log(rectangle.getPerimeter());
-console.log(rectangle.getArea());
+console.log(rectangle.perimeter);
+console.log(rectangle.area);
 
 rectangle.width = 8;
 rectangle.height = 10;
 
-console.log(rectangle.getPerimeter());
-console.log(rectangle.getArea());
+console.log(rectangle.perimeter);
+console.log(rectangle.area);

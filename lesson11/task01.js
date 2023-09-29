@@ -6,29 +6,27 @@ const start = (min = 1, max = 100) => {
   const getUserNumber = () => {
     const userNumber = prompt('Введите число');
 
-    if (userNumber === null) {
-      alert('Пока :)');
-      return;
-    }
-
-    if (isNaN(userNumber) || +userNumber > max || +userNumber < min) {
-      alert(`Введи число от ${min} до ${max}`);
-      getUserNumber();
-      return;
-    }
 
     switch (true) {
+      case userNumber === null:
+        alert('Пока :)');
+        return null;
+      case isNaN(userNumber):
+      case +userNumber > max:
+      case +userNumber < min:
+        alert(`Введи число от ${min} до ${max}`);
+        break;
       case +userNumber > number:
         alert('Меньше');
-        getUserNumber();
-        return;
+        break;
       case +userNumber < number:
         alert('Больше');
-        getUserNumber();
-        return;
+        break;
       default:
         alert('Правильно!');
+        return number;
     }
+    getUserNumber();
   };
   getUserNumber();
 };
