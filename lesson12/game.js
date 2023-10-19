@@ -8,75 +8,71 @@
         return Math.floor(Math.random() * (max - min + 1) + min);
     };
 
-    const getFigure = (lang) => {
-        const figures = lang === 'ENG' || lang === 'EN' ? FIGURES_ENG : FIGURES_RUS;
+        const findIndexOfAnswer = (figures, answer) => 
+            answer.length ?
+                figures.map(figure => figure.slice(0, answer.length))
+                    .indexOf(answer) : -1;
 
-        const findAnswer = (arr, n) => {
-            for (let i = 0; i < arr.length; ++i) {
-                if (arr[i].indexOf(n) == 0) {
-                    return arr[i];
-                }
-            }
-            return false;
-        };
+        const getFigure = (figures) => {
 
-
-        const answer = prompt(`Выбери: "${figures.join('", "')}"?`);
+            const answer = prompt(`Выбери: "${figures.join('", "')}"?`);
 
         if (answer === null) {
             return null;
         }
 
-        const userChoice = findAnswer(figures, answer.toLowerCase().trim());
-        return userChoice;
+        return findIndexOfAnswer(figures, answer.toLowerCase().trim());
+
     };
 
     const game = (language) => {
+        let roundCount = 0;
         const result = {
             player: 0,
             computer: 0,
         };
-        const lang = language === 'ENG' || language === 'EN' ? FIGURES_ENG : FIGURES_RUS;
-        let roundCount = 0;
+
+        const figures = language === 'ENG' || language === 'EN' ? FIGURES_ENG : FIGURES_RUS;
+        
 
         return function start() {
-            const computerChoice = lang[getRandomIntInclusive(0, 2)];
-
-            const userChoice = getFigure(language);
-
-            if (userChoice === null && confirm("Вы точно хотите выйти?")) {
-                return alert(
-                        `Итоговый результат:
-                        Игрок: ${result.player}
-                        Компьютер: ${result.computer}`
-                        );
-            }
-
             let roundResult = '';
-            switch (lang.indexOf(userChoice)) {
-                case lang.indexOf(computerChoice):
+            const computerChoice = getRandomIntInclusive(0, 2);
+            const userChoice = getFigure(figures);
+
+            
+            switch (userChoice) {
+                case null:
+                    if (confirm("Вы точно хотите выйти?")) {
+                        return alert(
+                            `Итоговый результат:
+                            Игрок: ${result.player}
+                            Компьютер: ${result.computer}`);
+                    }
+                    break;
+                case computerChoice:
                     roundResult = 'Ничья';
                     break;
-                case (lang.indexOf(computerChoice) + 1) % 3:
+                case (computerChoice + 1) % 3:
                     roundResult = 'Выиграл компьютер';
-                    result.player++;
-                    break;
-                case (lang.indexOf(computerChoice) + 2) % 3:
-                    roundResult = 'Вы выиграли';
                     result.computer++;
                     break;
-                default:
+                case (computerChoice + 2) % 3:
+                    roundResult = 'Вы выиграли';
+                    result.player++;
+                    
+                    break;
+                    default:
                     roundResult = 'Неизвестный выбор';
             }
-            
-            roundCount++;
 
-            alert(
-                `${roundResult}
-                Игрок: ${userChoice}
-                Компьютер: ${computerChoice}`
-            );
-
+            if (userChoice !== null && userChoice !== -1) {
+                roundCount++;
+                alert(
+                    `${roundResult}
+                    Игрок: ${figures[userChoice]}
+                    Компьютер: ${figures[computerChoice]}`);
+            }
 
             start();
         };
