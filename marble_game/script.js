@@ -1,4 +1,4 @@
 'use strict';
 
-const start = window.marbles();
+const start = window.marbls();
 start();

@@ -18,8 +18,14 @@
       if (balls.playerBall < 0) {
         balls.playerBall = 0;
       }
+      if (balls.playerBall > 10) {
+        balls.playerBall = 10;
+      }
       if (balls.botBall < 0) {
         balls.botBall = 0;
+      }
+      if (balls.botBall > 10) {
+        balls.botBall = 10;
       }
       alert(`
       Количество шариков:
@@ -39,7 +45,8 @@
       const playerPrompt = +tempPlayer;
 
       if (!Number.isInteger(playerPrompt) ||
-      playerPrompt > balls.playerBall || playerPrompt <= 0) {
+      playerPrompt > Math.min(balls.playerBall,
+          10 - balls.botBall) || playerPrompt <= 0) {
         alert('Введи другое число');
         playerGame();
         return;
@@ -48,31 +55,38 @@
       const player = playerPrompt % 2 === 0;
       const bot = getRandomInt(0, 1) === 0;
 
+      const takenBalls = Math.min(playerPrompt, balls.playerBall,
+          10 - balls.botBall);
+
       if (bot === player) {
-        alert(`Бот угадал и ты отдаешь ему ${playerPrompt} шарика(ов)`);
-        balls.playerBall -= playerPrompt;
-        balls.botBall += playerPrompt;
+        alert(`Бот угадал и ты отдаешь ему ${takenBalls} шарика(ов)`);
+        balls.playerBall -= takenBalls;
+        balls.botBall += takenBalls;
       } else {
-        alert(`Бот не угадал и отдает тебе ${playerPrompt} шарика(ов)`);
-        balls.playerBall += playerPrompt;
-        balls.botBall -= playerPrompt;
+        alert(`Бот не угадал и отдает тебе ${takenBalls} шарика(ов)`);
+        balls.playerBall += takenBalls;
+        balls.botBall -= takenBalls;
       }
     };
 
     const botGame = () => {
-      const botNumber = getRandomInt(1, balls.botBall);
+      const botNumber =
+      getRandomInt(1, Math.min(balls.botBall, 10 - balls.playerBall));
       const player = confirm('Бот загадал число\nУгадай, число четное?');
 
       const bot = botNumber % 2 === 0;
 
+      const takenBalls = Math.min(botNumber,
+          balls.botBall, 10 - balls.playerBall);
+
       if (player === bot) {
-        alert(`Ты угадал и получаешь ${botNumber} шарика(ов)`);
-        balls.playerBall += botNumber;
-        balls.botBall -= botNumber;
+        alert(`Ты угадал и получаешь ${takenBalls} шарика(ов)`);
+        balls.playerBall += takenBalls;
+        balls.botBall -= takenBalls;
       } else {
-        alert(`Ты не угадал и отдаешь ${botNumber} шарика(ов)`);
-        balls.playerBall -= botNumber;
-        balls.botBall += botNumber;
+        alert(`Ты не угадал и отдаешь ${takenBalls} шарика(ов)`);
+        balls.playerBall -= takenBalls;
+        balls.botBall += takenBalls;
       }
     };
 
@@ -80,8 +94,8 @@
       let round = 1;
       let continueGame = true;
 
-      while (balls.playerBall > 0 &&
-        balls.botBall > 0 && step && continueGame) {
+      while (balls.playerBall > 0 && balls.botBall >
+      0 && step && continueGame) {
         switch (round % 2) {
           case 1:
             playerGame();
@@ -117,5 +131,4 @@
   window.marbls = game;
 })();
 
-const start = window.marbls();
-start();
+
